@@ -1,2 +1,2 @@
-# uexMobSmsVerify
-mob短信验证码插件
+# uexMobSMS
+mob短信插件
