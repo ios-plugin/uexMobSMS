@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="utf-8" ?>
-<uexplugins>
-    <plugin name="uexMobSMS">
-        <method name="init"></method>
-        <method name="sendCode"></method>
-        <method name="commitCode"></method>
-    </plugin>
-</uexplugins>
