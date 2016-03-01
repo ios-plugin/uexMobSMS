@@ -30,8 +30,6 @@
 		09490C7F1C3FABA90040B981 /* libuexMobSMS.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libuexMobSMS.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		09490C821C3FABA90040B981 /* EUExMobSMS.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EUExMobSMS.h; sourceTree = "<group>"; };
 		09490C841C3FABA90040B981 /* EUExMobSMS.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EUExMobSMS.m; sourceTree = "<group>"; };
-		09490CA51C3FAD380040B981 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/SMS_SDKLocalizable.strings; sourceTree = "<group>"; };
-		09490CA81C3FAD380040B981 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/SMS_SDKLocalizable.strings"; sourceTree = "<group>"; };
 		094C96321C5B3227004F3EE6 /* EUExBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EUExBase.h; path = EUExMobSMS/engineHeader/EUExBase.h; sourceTree = SOURCE_ROOT; };
 		094C96331C5B3230004F3EE6 /* EUExBaseDefine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EUExBaseDefine.h; path = EUExMobSMS/engineHeader/EUExBaseDefine.h; sourceTree = SOURCE_ROOT; };
 		094C96341C5B3235004F3EE6 /* EUtility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EUtility.h; path = EUExMobSMS/engineHeader/EUtility.h; sourceTree = SOURCE_ROOT; };
@@ -110,7 +108,6 @@
 		09490CA31C3FAD380040B981 /* SMS_SDK */ = {
 			isa = PBXGroup;
 			children = (
-				09490CA41C3FAD380040B981 /* SMS_SDKLocalizable.strings */,
 				094C96351C5B3253004F3EE6 /* MOBFoundation.framework */,
 				094C96371C5B325C004F3EE6 /* SMS_SDK.framework */,
 			);
@@ -196,18 +193,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXVariantGroup section */
-		09490CA41C3FAD380040B981 /* SMS_SDKLocalizable.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				09490CA51C3FAD380040B981 /* en */,
-				09490CA81C3FAD380040B981 /* zh-Hans */,
-			);
-			name = SMS_SDKLocalizable.strings;
-			sourceTree = "<group>";
-		};
-/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		09490C861C3FABA90040B981 /* Debug */ = {
