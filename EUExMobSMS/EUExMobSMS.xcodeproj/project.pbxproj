@@ -9,8 +9,6 @@
 /* Begin PBXBuildFile section */
 		09490C831C3FABA90040B981 /* EUExMobSMS.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 09490C821C3FABA90040B981 /* EUExMobSMS.h */; };
 		09490C851C3FABA90040B981 /* EUExMobSMS.m in Sources */ = {isa = PBXBuildFile; fileRef = 09490C841C3FABA90040B981 /* EUExMobSMS.m */; };
-		094C96361C5B3253004F3EE6 /* MOBFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 094C96351C5B3253004F3EE6 /* MOBFoundation.framework */; };
-		094C96381C5B325C004F3EE6 /* SMS_SDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 094C96371C5B325C004F3EE6 /* SMS_SDK.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -33,8 +31,6 @@
 		094C96321C5B3227004F3EE6 /* EUExBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EUExBase.h; path = EUExMobSMS/engineHeader/EUExBase.h; sourceTree = SOURCE_ROOT; };
 		094C96331C5B3230004F3EE6 /* EUExBaseDefine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EUExBaseDefine.h; path = EUExMobSMS/engineHeader/EUExBaseDefine.h; sourceTree = SOURCE_ROOT; };
 		094C96341C5B3235004F3EE6 /* EUtility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EUtility.h; path = EUExMobSMS/engineHeader/EUtility.h; sourceTree = SOURCE_ROOT; };
-		094C96351C5B3253004F3EE6 /* MOBFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MOBFoundation.framework; path = EUExMobSMS/sourceCode/SMS_SDK/MOBFoundation.framework; sourceTree = SOURCE_ROOT; };
-		094C96371C5B325C004F3EE6 /* SMS_SDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SMS_SDK.framework; path = EUExMobSMS/sourceCode/SMS_SDK/SMS_SDK.framework; sourceTree = SOURCE_ROOT; };
 		094C963A1C5B327E004F3EE6 /* JSON.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSON.h; sourceTree = "<group>"; };
 		094C963B1C5B327E004F3EE6 /* JSONParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSONParser.h; sourceTree = "<group>"; };
 		094C963C1C5B327E004F3EE6 /* MD5Digest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MD5Digest.h; sourceTree = "<group>"; };
@@ -51,8 +47,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				094C96361C5B3253004F3EE6 /* MOBFoundation.framework in Frameworks */,
-				094C96381C5B325C004F3EE6 /* SMS_SDK.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -99,19 +93,9 @@
 		09490C981C3FACB70040B981 /* sourceCode */ = {
 			isa = PBXGroup;
 			children = (
-				09490CA31C3FAD380040B981 /* SMS_SDK */,
 				094C96391C5B327E004F3EE6 /* JSON */,
 			);
 			path = sourceCode;
-			sourceTree = "<group>";
-		};
-		09490CA31C3FAD380040B981 /* SMS_SDK */ = {
-			isa = PBXGroup;
-			children = (
-				094C96351C5B3253004F3EE6 /* MOBFoundation.framework */,
-				094C96371C5B325C004F3EE6 /* SMS_SDK.framework */,
-			);
-			path = SMS_SDK;
 			sourceTree = "<group>";
 		};
 		094C96391C5B327E004F3EE6 /* JSON */ = {
