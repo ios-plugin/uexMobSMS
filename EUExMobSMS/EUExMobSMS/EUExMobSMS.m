@@ -10,7 +10,7 @@
 #import <UIKit/UIKit.h>
 #import "EUtility.h"
 #import "SMS_SDK/SMSSDK.h"
-#import "JSON.h"
+
 @implementation EUExMobSMS
 //+ (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions{
 ////    //      测试Key
@@ -25,17 +25,17 @@
 ////    [SMSSDK registerApp:appKey withSecret:appSecret];
 //    return YES;
 //}
--(id)initWithBrwView:(EBrowserView *) eInBrwView {
-    if (self = [super initWithBrwView:eInBrwView]) {
-        
-    }
-    return self;
-}
+//-(id)initWithBrwView:(EBrowserView *) eInBrwView {
+//    if (self = [super initWithBrwView:eInBrwView]) {
+//        
+//    }
+//    return self;
+//}
 -(void)init:(NSMutableArray *)inArguments{
     NSString *jsonStr = nil;
     if (inArguments.count > 0) {
         jsonStr = [inArguments objectAtIndex:0];
-        self.json1Dict = [jsonStr JSONValue];//将JSON类型的字符串转化为可变字典
+        self.json1Dict = [jsonStr ac_JSONValue];//将JSON类型的字符串转化为可变字典
         
     }else{
         return;
@@ -49,10 +49,12 @@
 
 -(void)sendCode:(NSMutableArray *)inArguments {
     NSString *jsonStr = nil;
+    ACJSFunctionRef *func = nil;
     if (inArguments.count > 0) {
         
         jsonStr = [inArguments objectAtIndex:0];
-        self.jsonDict = [jsonStr JSONValue];//将JSON类型的字符串转化为可变字典
+        self.jsonDict = [jsonStr ac_JSONValue];//将JSON类型的字符串转化为可变字典
+        func = JSFunctionArg(inArguments.lastObject);
         
     }else{
         return;
@@ -65,26 +67,30 @@
             NSLog(@"getVerificationCode:%@", error);
             NSString *status = @"1";
             NSDictionary *dic = @{@"status":status,@"errorCode":@(error.code),@"msg":error.userInfo[@"getVerificationCode"]};
-            NSString *dicStr = [dic JSONFragment];
-            NSString *jsString = [NSString stringWithFormat:@"uexMobSMS.cbSendClick(%@);",dicStr];
-            [EUtility brwView:meBrwView evaluateScript:jsString];
+            //NSString *dicStr = [dic ac_JSONFragment];
+            //NSString *jsString = [NSString stringWithFormat:@"uexMobSMS.cbSendClick(%@);",dicStr];
+            //[EUtility brwView:meBrwView evaluateScript:jsString];
+            [self.webViewEngine callbackWithFunctionKeyPath:@"uexMobSMS.cbSendClick" arguments:ACArgsPack(dic)];
+            [func executeWithArguments:ACArgsPack(dic)];
         }else{
             //NSString *msg = @"获取验证码成功";
             NSString *status = @"0";
             NSDictionary *dic = @{@"status":status};
-            NSString *dicStr = [dic JSONFragment];
-            NSString *jsString = [NSString stringWithFormat:@"uexMobSMS.cbSendClick(%@);",dicStr];
-            [EUtility brwView:meBrwView evaluateScript:jsString];
-            
+            //NSString *dicStr = [dic ac_JSONFragment];
+            //NSString *jsString = [NSString stringWithFormat:@"uexMobSMS.cbSendClick(%@);",dicStr];
+            //[EUtility brwView:meBrwView evaluateScript:jsString];
+             [self.webViewEngine callbackWithFunctionKeyPath:@"uexMobSMS.cbSendClick" arguments:ACArgsPack(dic)];
+             [func executeWithArguments:ACArgsPack(dic)];
         }
     }];
 }
 - (void)commitCode:(NSMutableArray *)inArguments{
     NSString *jsonStr = nil;
+    ACJSFunctionRef *func = nil;
     if (inArguments.count > 0) {
         jsonStr = [inArguments objectAtIndex:0];
-        self.jsonDict = [jsonStr JSONValue];
-        
+        self.jsonDict = [jsonStr ac_JSONValue];
+        func = JSFunctionArg(inArguments.lastObject);
     }else{
         return;
     }
@@ -97,15 +103,19 @@
         if (error) {
             NSLog(@"commitVerificationCode:%@", error);
             NSDictionary *dic = @{@"status":@1,@"errorCode":@(error.code),@"msg":error.userInfo[@"commitVerificationCode"]};
-            NSString *dicStr = [dic JSONFragment];
-            NSString *jsString = [NSString stringWithFormat:@"uexMobSMS.cbCommitClick(%@);",dicStr];
-            [EUtility brwView:meBrwView evaluateScript:jsString];
+            //NSString *dicStr = [dic ac_JSONFragment];
+            //NSString *jsString = [NSString stringWithFormat:@"uexMobSMS.cbCommitClick(%@);",dicStr];
+            //[EUtility brwView:meBrwView evaluateScript:jsString];
+             [self.webViewEngine callbackWithFunctionKeyPath:@"uexMobSMS.cbCommitClick" arguments:ACArgsPack(dic)];
+            [func executeWithArguments:ACArgsPack(dic)];
         }else{
             //NSString *msg = @"验证成功";
             NSDictionary *dic = @{@"status":@"0"};
-            NSString *dicStr = [dic JSONFragment];
-            NSString *jsString = [NSString stringWithFormat:@"uexMobSMS.cbCommitClick(%@);",dicStr];
-            [EUtility brwView:meBrwView evaluateScript:jsString];
+            //NSString *dicStr = [dic ac_JSONFragment];
+            //NSString *jsString = [NSString stringWithFormat:@"uexMobSMS.cbCommitClick(%@);",dicStr];
+            //[EUtility brwView:meBrwView evaluateScript:jsString];
+            [self.webViewEngine callbackWithFunctionKeyPath:@"uexMobSMS.cbCommitClick" arguments:ACArgsPack(dic)];
+            [func executeWithArguments:ACArgsPack(dic)];
             
         }
     }];
