@@ -11,5 +11,4 @@
 @interface EUExMobSMS : EUExBase
 @property (nonatomic, retain) NSMutableDictionary *jsonDict;
 @property (nonatomic, retain) NSMutableDictionary *json1Dict;
-@property (nonatomic) BOOL initFirst;
 @end
