@@ -10,5 +10,5 @@
 #import <AppCanKit/AppCanKit.h>
 @interface EUExMobSMS : EUExBase
 @property (nonatomic, retain) NSMutableDictionary *jsonDict;
-@property (nonatomic, retain) NSMutableDictionary *json1Dict;
+@property (nonatomic, retain) NSDictionary *json1Dict;
 @end
