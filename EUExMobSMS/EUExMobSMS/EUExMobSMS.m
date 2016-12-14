@@ -10,7 +10,7 @@
 #import <UIKit/UIKit.h>
 #import "EUtility.h"
 #import "SMS_SDK/SMSSDK.h"
-#import "JSON.h"
+
 @implementation EUExMobSMS
 //+ (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions{
 ////    //      测试Key
@@ -25,87 +25,80 @@
 ////    [SMSSDK registerApp:appKey withSecret:appSecret];
 //    return YES;
 //}
--(id)initWithBrwView:(EBrowserView *) eInBrwView {
-    if (self = [super initWithBrwView:eInBrwView]) {
-        
-    }
-    return self;
-}
+//-(id)initWithBrwView:(EBrowserView *) eInBrwView {
+//    if (self = [super initWithBrwView:eInBrwView]) {
+//        
+//    }
+//    return self;
+//}
 -(void)init:(NSMutableArray *)inArguments{
-    NSString *jsonStr = nil;
+    
     if (inArguments.count > 0) {
-        jsonStr = [inArguments objectAtIndex:0];
-        self.json1Dict = [jsonStr JSONValue];//将JSON类型的字符串转化为可变字典
+        ACArgsUnpack(NSDictionary*dic) = inArguments;
+        NSString* appKey = [dic objectForKey:@"uexMobSMS_APPKey"];
+        NSString *appSecret = [dic objectForKey:@"uexMobSMS_APPSecret"];
+        [SMSSDK registerApp:appKey withSecret:appSecret];
         
     }else{
         return;
     }
-    NSString* appKey = [self.json1Dict objectForKey:@"uexMobSMS_APPKey"];
-    NSString *appSecret = [self.json1Dict objectForKey:@"uexMobSMS_APPSecret"];
-    [SMSSDK registerApp:appKey withSecret:appSecret];
+    
 }
 
 
 
 -(void)sendCode:(NSMutableArray *)inArguments {
-    NSString *jsonStr = nil;
+    NSString *phone = nil;
+    NSString *countryCode = nil;
+    ACJSFunctionRef *func = nil;
     if (inArguments.count > 0) {
-        
-        jsonStr = [inArguments objectAtIndex:0];
-        self.jsonDict = [jsonStr JSONValue];//将JSON类型的字符串转化为可变字典
+        ACArgsUnpack(NSDictionary*dic) = inArguments;
+        phone = [NSString stringWithFormat:@"%@",[dic objectForKey:@"phoneNum"]];
+        countryCode = [NSString stringWithFormat:@"%@",[dic objectForKey:@"countryCode"]];
+        func = JSFunctionArg(inArguments.lastObject);
         
     }else{
         return;
     }
-    
-    NSString *phone = [self.jsonDict objectForKey:@"phoneNum"];
-    NSString *countryCode = [self.jsonDict objectForKey:@"countryCode"];
     [SMSSDK getVerificationCodeByMethod:SMSGetCodeMethodSMS phoneNumber:phone zone:countryCode customIdentifier:nil result:^(NSError *error) {
         if (error) {
             NSLog(@"getVerificationCode:%@", error);
             NSString *status = @"1";
             NSDictionary *dic = @{@"status":status,@"errorCode":@(error.code),@"msg":error.userInfo[@"getVerificationCode"]};
-            NSString *dicStr = [dic JSONFragment];
-            NSString *jsString = [NSString stringWithFormat:@"uexMobSMS.cbSendClick(%@);",dicStr];
-            [EUtility brwView:meBrwView evaluateScript:jsString];
+            [self.webViewEngine callbackWithFunctionKeyPath:@"uexMobSMS.cbSendClick" arguments:ACArgsPack(dic)];
+            [func executeWithArguments:ACArgsPack(@(error.code),@{@"msg":error.userInfo[@"getVerificationCode"]})];
         }else{
-            //NSString *msg = @"获取验证码成功";
             NSString *status = @"0";
             NSDictionary *dic = @{@"status":status};
-            NSString *dicStr = [dic JSONFragment];
-            NSString *jsString = [NSString stringWithFormat:@"uexMobSMS.cbSendClick(%@);",dicStr];
-            [EUtility brwView:meBrwView evaluateScript:jsString];
-            
+             [self.webViewEngine callbackWithFunctionKeyPath:@"uexMobSMS.cbSendClick" arguments:ACArgsPack(dic)];
+             [func executeWithArguments:ACArgsPack(@(0))];
         }
     }];
 }
 - (void)commitCode:(NSMutableArray *)inArguments{
-    NSString *jsonStr = nil;
+    NSString *countryCode = nil;
+    NSString *phone = nil;
+    NSString *validCode = nil;
+    ACJSFunctionRef *func = nil;
     if (inArguments.count > 0) {
-        jsonStr = [inArguments objectAtIndex:0];
-        self.jsonDict = [jsonStr JSONValue];
-        
+        ACArgsUnpack(NSDictionary*dic) = inArguments;
+        phone = [NSString stringWithFormat:@"%@",[dic objectForKey:@"phoneNum"]];
+        countryCode = [NSString stringWithFormat:@"%@",[dic objectForKey:@"countryCode"]];
+        validCode = [NSString stringWithFormat:@"%@",[dic objectForKey:@"validCode"]];
+        func = JSFunctionArg(inArguments.lastObject);
     }else{
         return;
     }
-    
-    NSString *phone = [self.jsonDict objectForKey:@"phoneNum"];
-    NSString *countryCode = [self.jsonDict objectForKey:@"countryCode"];
-    NSString *validCode = [self.jsonDict objectForKey:@"validCode"];
-
     [SMSSDK commitVerificationCode:validCode phoneNumber:phone zone:countryCode result:^(NSError *error) {
         if (error) {
             NSLog(@"commitVerificationCode:%@", error);
             NSDictionary *dic = @{@"status":@1,@"errorCode":@(error.code),@"msg":error.userInfo[@"commitVerificationCode"]};
-            NSString *dicStr = [dic JSONFragment];
-            NSString *jsString = [NSString stringWithFormat:@"uexMobSMS.cbCommitClick(%@);",dicStr];
-            [EUtility brwView:meBrwView evaluateScript:jsString];
+            [self.webViewEngine callbackWithFunctionKeyPath:@"uexMobSMS.cbCommitClick" arguments:ACArgsPack(dic)];
+            [func executeWithArguments:ACArgsPack(@(error.code),@{@"msg":error.userInfo[@"commitVerificationCode"]})];
         }else{
-            //NSString *msg = @"验证成功";
             NSDictionary *dic = @{@"status":@"0"};
-            NSString *dicStr = [dic JSONFragment];
-            NSString *jsString = [NSString stringWithFormat:@"uexMobSMS.cbCommitClick(%@);",dicStr];
-            [EUtility brwView:meBrwView evaluateScript:jsString];
+            [self.webViewEngine callbackWithFunctionKeyPath:@"uexMobSMS.cbCommitClick" arguments:ACArgsPack(dic)];
+            [func executeWithArguments:ACArgsPack(@(0))];
             
         }
     }];
