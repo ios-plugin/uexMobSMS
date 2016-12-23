@@ -89,7 +89,7 @@
     }else{
         return;
     }
-    [SMSSDK commitVerificationCode:validCode phoneNumber:phone zone:countryCode result:^(NSError *error) {
+    [SMSSDK commitVerificationCode:validCode phoneNumber:phone zone:countryCode result:^(SMSSDKUserInfo *userInfo,NSError *error) {
         if (error) {
             NSLog(@"commitVerificationCode:%@", error);
             NSDictionary *dic = @{@"status":@1,@"errorCode":@(error.code),@"msg":error.userInfo[@"commitVerificationCode"]};
